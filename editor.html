@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Editor de Cartelería · Super Fontana</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Arial, sans-serif; background:#efe9df; display:flex; min-height:100vh; }
+  .panel { width: 380px; background:#1a1a1a; color:#fff; padding:22px; overflow-y:auto; max-height:100vh; }
+  .panel h1 { font-size:18px; margin:0 0 4px; }
+  .panel .sub { font-size:12px; color:#999; margin-bottom:18px; }
+  .field { margin-bottom:14px; }
+  .field label { display:block; font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:#aaa; margin-bottom:6px; }
+  .field input[type=text], .field input[type=number] {
+    width:100%; padding:8px 9px; border:1px solid #444; background:#2a2a2a; color:#fff; border-radius:4px; font-size:13px;
+  }
+  .field input[type=color] { width:100%; height:34px; border:1px solid #444; background:#2a2a2a; border-radius:4px; }
+  .field input[type=file] { width:100%; font-size:12px; color:#ccc; }
+  .row2 { display:flex; gap:8px; }
+  .row2 .field { flex:1; }
+  button {
+    padding:11px; background:#333; color:#fff; border:1px solid #555; border-radius:6px;
+    cursor:pointer; font-size:13px; width:100%; margin-bottom:8px;
+  }
+  button.primary { background:#d00000; border:none; font-weight:bold; }
+  button.primary:hover { background:#b00000; }
+  .patch-list { border-top:1px solid #333; margin-top:10px; padding-top:10px; }
+  .patch-item {
+    background:#232323; border:1px solid #3a3a3a; border-radius:6px; padding:10px; margin-bottom:8px; cursor:pointer;
+  }
+  .patch-item.selected { border-color:#d00000; background:#2a1414; }
+  .patch-item .ptitle { font-size:12px; font-weight:bold; margin-bottom:2px; }
+  .patch-item .pdel { color:#d55; font-size:11px; float:right; cursor:pointer; }
+  .hint { font-size:11px; color:#888; line-height:1.5; margin-bottom:14px; }
+  .stage { flex:1; display:flex; align-items:center; justify-content:center; padding:30px; overflow:auto; }
+  #cartel { box-shadow:0 20px 60px rgba(0,0,0,.3); border-radius:4px; cursor:default; max-width: 100%; max-height: 92vh; }
+</style>
+</head>
+<body>
+
+<div class="panel">
+  <h1>Editor de Cartelería</h1>
+  <div class="sub">Reutilizá un cartel real con datos nuevos</div>
+
+  <div class="field">
+    <label>1. Subí el cartel base (PNG/JPG de tu biblioteca)</label>
+    <input type="file" id="baseImg" accept="image/*">
+  </div>
+
+  <div class="hint">
+    2. Tocá "Agregar parche" para crear un recuadro editable (por ejemplo, sobre el precio viejo). Arrastralo con el mouse hasta la posición correcta y ajustá tamaño/color/texto acá al costado.
+  </div>
+
+  <button id="addPatch">+ Agregar parche (texto/precio)</button>
+
+  <div id="patchFields" style="display:none;">
+    <div class="field">
+      <label>Texto</label>
+      <input type="text" id="pText" value="$ 0.000,00">
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Ancho</label>
+        <input type="number" id="pW" value="400">
+      </div>
+      <div class="field">
+        <label>Alto</label>
+        <input type="number" id="pH" value="120">
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Tamaño de letra</label>
+        <input type="number" id="pFont" value="70">
+      </div>
+      <div class="field">
+        <label>Color de fondo</label>
+        <input type="color" id="pBg" value="#0a2f6b">
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Color de texto</label>
+        <input type="color" id="pColor" value="#ffffff">
+      </div>
+      <div class="field">
+        <label>Fondo visible</label>
+        <input type="checkbox" id="pBgOn" checked style="width:auto;height:20px;margin-top:6px;">
+      </div>
+    </div>
+  </div>
+
+  <div class="patch-list" id="patchList"></div>
+
+  <button class="primary" id="download">Descargar cartel editado (PNG)</button>
+</div>
+
+<div class="stage">
+  <canvas id="cartel" width="900" height="1300"></canvas>
+</div>
+
+<script>
+const canvas = document.getElementById('cartel');
+const ctx = canvas.getContext('2d');
+let baseImage = null;
+let patches = []; // {id,x,y,w,h,text,fontSize,bg,color,bgOn}
+let selectedId = null;
+let dragging = false, dragOffX=0, dragOffY=0;
+let nextId = 1;
+
+document.getElementById('baseImg').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = new Image();
+    img.onload = () => {
+      baseImage = img;
+      canvas.width = img.width;
+      canvas.height = img.height;
+      patches = [];
+      selectedId = null;
+      render();
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+document.getElementById('addPatch').addEventListener('click', () => {
+  if (!baseImage) { alert('Primero subí el cartel base'); return; }
+  const p = {
+    id: nextId++,
+    x: canvas.width/2 - 200,
+    y: canvas.height - 220,
+    w: 400, h: 120,
+    text: '$ 0.000,00',
+    fontSize: 70,
+    bg: '#0a2f6b',
+    color: '#ffffff',
+    bgOn: true
+  };
+  patches.push(p);
+  selectPatch(p.id);
+  render();
+});
+
+function selectPatch(id) {
+  selectedId = id;
+  const p = patches.find(p=>p.id===id);
+  if (!p) { document.getElementById('patchFields').style.display='none'; renderList(); return; }
+  document.getElementById('patchFields').style.display='block';
+  document.getElementById('pText').value = p.text;
+  document.getElementById('pW').value = p.w;
+  document.getElementById('pH').value = p.h;
+  document.getElementById('pFont').value = p.fontSize;
+  document.getElementById('pBg').value = p.bg;
+  document.getElementById('pColor').value = p.color;
+  document.getElementById('pBgOn').checked = p.bgOn;
+  renderList();
+}
+
+['pText','pW','pH','pFont','pBg','pColor','pBgOn'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    const p = patches.find(p=>p.id===selectedId);
+    if (!p) return;
+    p.text = document.getElementById('pText').value;
+    p.w = parseInt(document.getElementById('pW').value)||100;
+    p.h = parseInt(document.getElementById('pH').value)||50;
+    p.fontSize = parseInt(document.getElementById('pFont').value)||40;
+    p.bg = document.getElementById('pBg').value;
+    p.color = document.getElementById('pColor').value;
+    p.bgOn = document.getElementById('pBgOn').checked;
+    render();
+  });
+});
+
+function renderList() {
+  const list = document.getElementById('patchList');
+  list.innerHTML = '';
+  patches.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'patch-item' + (p.id===selectedId ? ' selected':'');
+    div.innerHTML = `<span class="pdel">✕ borrar</span><div class="ptitle">${p.text || 'parche'}</div><div style="font-size:10px;color:#888">${p.w}×${p.h}px</div>`;
+    div.addEventListener('click', (e) => {
+      if (e.target.classList.contains('pdel')) {
+        patches = patches.filter(x=>x.id!==p.id);
+        if (selectedId===p.id) selectedId=null;
+        render();
+        return;
+      }
+      selectPatch(p.id);
+      render();
+    });
+    list.appendChild(div);
+  });
+}
+
+function render() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  if (baseImage) ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
+  patches.forEach(p => {
+    if (p.bgOn) {
+      ctx.fillStyle = p.bg;
+      ctx.fillRect(p.x, p.y, p.w, p.h);
+    }
+    ctx.fillStyle = p.color;
+    ctx.font = 'bold ' + p.fontSize + 'px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(p.text, p.x + p.w/2, p.y + p.h/2, p.w - 10);
+    if (p.id === selectedId) {
+      ctx.strokeStyle = '#ff2d2d';
+      ctx.lineWidth = 3;
+      ctx.setLineDash([8,6]);
+      ctx.strokeRect(p.x, p.y, p.w, p.h);
+      ctx.setLineDash([]);
+    }
+  });
+  renderList();
+}
+
+function getCanvasCoords(e) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  return {
+    x: (e.clientX - rect.left) * scaleX,
+    y: (e.clientY - rect.top) * scaleY
+  };
+}
+
+canvas.addEventListener('mousedown', e => {
+  const {x,y} = getCanvasCoords(e);
+  // buscar patch clickeado (de arriba hacia abajo)
+  for (let i = patches.length-1; i>=0; i--) {
+    const p = patches[i];
+    if (x>=p.x && x<=p.x+p.w && y>=p.y && y<=p.y+p.h) {
+      selectPatch(p.id);
+      dragging = true;
+      dragOffX = x - p.x;
+      dragOffY = y - p.y;
+      render();
+      return;
+    }
+  }
+  selectedId = null;
+  render();
+});
+
+canvas.addEventListener('mousemove', e => {
+  if (!dragging || selectedId===null) return;
+  const {x,y} = getCanvasCoords(e);
+  const p = patches.find(p=>p.id===selectedId);
+  if (!p) return;
+  p.x = x - dragOffX;
+  p.y = y - dragOffY;
+  render();
+});
+
+window.addEventListener('mouseup', () => { dragging = false; });
+
+document.getElementById('download').addEventListener('click', () => {
+  if (!baseImage) { alert('Primero subí el cartel base'); return; }
+  selectedId = null; // ocultar el marco de seleccion antes de exportar
+  render();
+  const link = document.createElement('a');
+  link.download = 'cartel_editado.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+});
+
+render();
+</script>
+
+</body>
+</html>
