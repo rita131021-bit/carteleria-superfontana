@@ -1,0 +1,569 @@
+[
+  {
+    "nombre": "cartel_002.png",
+    "categoria_original": "01_marcas",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/01_marcas/cartel_002.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_009.png",
+    "categoria_original": "01_marcas",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/01_marcas/cartel_009.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_014.png",
+    "categoria_original": "01_marcas",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/01_marcas/cartel_014.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_027.png",
+    "categoria_original": "01_marcas",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/01_marcas/cartel_027.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_050.png",
+    "categoria_original": "01_marcas",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/01_marcas/cartel_050.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_001.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_001.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_003.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_003.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_005.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_005.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_006.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_006.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_007.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_007.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_008.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_008.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_010.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_010.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_011.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_011.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_013.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_013.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_016.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_016.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_017.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_017.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_018.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_018.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_020.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_020.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_021.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_021.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_022.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_022.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_023.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_023.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_024.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_024.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_026.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_026.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_029.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_029.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_030.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_030.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_032.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_032.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_033.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_033.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_034.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_034.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_035.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_035.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_037.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_037.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_038.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_038.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_039.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_039.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_040.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_040.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_041.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_041.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_042.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_042.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_045.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_045.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_047.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_047.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_049.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_049.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_051.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_051.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_053.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_053.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_054.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_054.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_055.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_055.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_056.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_056.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_057.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_057.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_058.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_058.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_060.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/cartel_060.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "queso_holanda_la_colonia.png",
+    "categoria_original": "02_gondola_producto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/02_gondola_producto/queso_holanda_la_colonia.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_015.png",
+    "categoria_original": "03_precio_mayorista",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/03_precio_mayorista/cartel_015.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_019.png",
+    "categoria_original": "03_precio_mayorista",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/03_precio_mayorista/cartel_019.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_025.png",
+    "categoria_original": "03_precio_mayorista",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/03_precio_mayorista/cartel_025.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_043.png",
+    "categoria_original": "03_precio_mayorista",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/03_precio_mayorista/cartel_043.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_052.png",
+    "categoria_original": "03_precio_mayorista",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/03_precio_mayorista/cartel_052.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "budin_fantasia_limon_chocolate.png",
+    "categoria_original": "04_variedades_mismo_precio",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/04_variedades_mismo_precio/budin_fantasia_limon_chocolate.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_028.png",
+    "categoria_original": "04_variedades_mismo_precio",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/04_variedades_mismo_precio/cartel_028.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_031.png",
+    "categoria_original": "04_variedades_mismo_precio",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/04_variedades_mismo_precio/cartel_031.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_036.png",
+    "categoria_original": "04_variedades_mismo_precio",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/04_variedades_mismo_precio/cartel_036.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_044.png",
+    "categoria_original": "04_variedades_mismo_precio",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/04_variedades_mismo_precio/cartel_044.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_046.png",
+    "categoria_original": "04_variedades_mismo_precio",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/04_variedades_mismo_precio/cartel_046.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_048.png",
+    "categoria_original": "04_variedades_mismo_precio",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/04_variedades_mismo_precio/cartel_048.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_004.png",
+    "categoria_original": "05_sin_imagen_solo_texto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/05_sin_imagen_solo_texto/cartel_004.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_012.png",
+    "categoria_original": "05_sin_imagen_solo_texto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/05_sin_imagen_solo_texto/cartel_012.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_059.png",
+    "categoria_original": "05_sin_imagen_solo_texto",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/05_sin_imagen_solo_texto/cartel_059.png",
+    "estado": "pendiente_subir_imagen"
+  },
+  {
+    "nombre": "cartel_061.jpg",
+    "categoria_original": "06_logo_plantilla",
+    "estilo_id": null,
+    "zonas_editables_json": {},
+    "imagen_url": null,
+    "archivo_local": "recursos/carteles-originales/06_logo_plantilla/cartel_061.jpg",
+    "estado": "pendiente_subir_imagen"
+  }
+]
