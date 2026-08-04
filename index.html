@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Fontana Designer</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <!-- BARRA LATERAL (SIDEBAR) -->
+  <div class="sidebar">
+    <div class="brand-section">
+      <img src="logo_super_fontana.jpg" alt="Super Fontana" class="brand-logo-img" onerror="this.src='https://placehold.co/100x100?text=SF'">
+      <div>
+        <div class="brand-name">SUPER FONTANA</div>
+        <div class="brand-subtitle">Designer Pro</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a class="nav-item active" data-view="generador">
+          <span>⚡ Asistente Inteligente</span>
+        </a>
+      </li>
+      <li>
+        <a class="nav-item" data-view="identidad">
+          <span>🎨 Identidad de Marca</span>
+        </a>
+      </li>
+      <li>
+        <a class="nav-item" data-view="plantillas">
+          <span>🖼️ Biblioteca de Diseños</span>
+        </a>
+      </li>
+      <li>
+        <a class="nav-item" data-view="productos">
+          <span>📦 Catálogo Productos</span>
+        </a>
+      </li>
+      <li>
+        <a class="nav-item" data-view="historial">
+          <span>📜 Historial de Carteles</span>
+        </a>
+      </li>
+      <li>
+        <a class="nav-item" data-view="configuracion">
+          <span>⚙️ Configuración</span>
+        </a>
+      </li>
+    </ul>
+    <div class="nav-footer">
+      Super Fontana © 2026<br>Paraná, Entre Ríos
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <header class="app-header">
+      <div class="page-title" id="pageTitle">Asistente Inteligente de Diseño</div>
+      <div class="db-status" id="dbStatus">
+        <span class="status-dot disconnected" id="statusDot"></span>
+        <span id="statusText">Desconectado</span>
+      </div>
+    </header>
+
+    <!-- VISTA 1: ASISTENTE INTELIGENTE DE DISEÑO (EMPLEADO) -->
+    <div class="view-container active" id="view-generador">
+      <div class="generator-layout">
+        <!-- Panel Izquierdo: Formulario -->
+        <div class="controls-pane">
+          <!-- Paso 1: Tipo de Comunicación -->
+          <div class="card">
+            <div class="card-title">1. ¿Qué tipo de comunicación querés hacer?</div>
+            <div class="form-group">
+              <select id="genTipoComunicacion">
+                <option value="02_gondola_producto">Góndola / Oferta Individual</option>
+                <option value="03_precio_mayorista">Precio Mayorista (Llevando X...)</option>
+                <option value="04_variedades_mismo_precio">Variedades al mismo precio</option>
+                <option value="05_sin_imagen_solo_texto">Sin Imagen (Solo Texto)</option>
+                <option value="01_marcas">Folleto de Marca (Institucional)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Paso 2: Selección de Producto -->
+          <div class="card" id="genProductoCard">
+            <div class="card-title">2. Seleccioná el producto</div>
+            <div class="form-group">
+              <label for="genProductoSelect">Producto</label>
+              <select id="genProductoSelect">
+                <!-- Carga dinámica -->
+              </select>
+            </div>
+            
+            <!-- Detalles del producto seleccionado -->
+            <div id="genProductoDetalles" style="display:none; margin-top:10px; padding:10px; background: rgba(255,255,255,0.03); border-radius: 6px;">
+              <p style="font-size:12px; color:var(--text-muted);">Categoría: <span id="detProdCat" style="color:var(--text-main); font-weight:bold;">-</span></p>
+              <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Estilo Visual: <span id="detProdEstilo" style="color:var(--secondary); font-weight:bold;">-</span></p>
+            </div>
+          </div>
+
+          <!-- Paso 3: Precio y Variables -->
+          <div class="card">
+            <div class="card-title">3. Datos del Cartel</div>
+            <div class="row-grid">
+              <div class="form-group">
+                <label for="genPrecioEntero">Precio Entero</label>
+                <input type="number" id="genPrecioEntero" placeholder="Ej: 5799" value="5799">
+              </div>
+              <div class="form-group">
+                <label for="genPrecioCentavos">Centavos</label>
+                <input type="text" id="genPrecioCentavos" placeholder="Ej: 99" value="99">
+              </div>
+            </div>
+
+            <!-- Campos dinámicos para Mayorista -->
+            <div id="genCamposMayorista" style="display: none;">
+              <div class="form-group">
+                <label for="genCantUnidades">Cantidad de unidades</label>
+                <input type="number" id="genCantUnidades" placeholder="Ej: 3" value="3">
+              </div>
+            </div>
+
+            <!-- Campos dinámicos para Variedades -->
+            <div id="genCamposVariedades" style="display: none;">
+              <div class="form-group">
+                <label for="genTextoVariedades">Detalle Variedades (separadas por coma)</label>
+                <textarea id="genTextoVariedades" rows="2" placeholder="Ej: Vainilla, Chocolate, Dulce de Leche"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 4: Propuestas de Diseño -->
+          <div class="card">
+            <div class="card-title">4. Diseños Recomendados</div>
+            <p style="font-size: 11px; color: var(--text-muted);">Basados en el ADN visual del supermercado para esta categoría:</p>
+            <div class="proposal-card-grid" id="proposalsGrid">
+              <!-- Carga dinámica de propuestas -->
+              <p style="font-size: 12px; color: var(--text-muted); padding: 10px;">Selecciona un producto para ver propuestas...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel Derecho: Previsualización y Descarga -->
+        <div class="preview-pane">
+          <div class="card-title" style="margin-bottom:12px; align-self: flex-start;">Previsualización Final</div>
+          <div class="canvas-container">
+            <canvas id="editorCanvas" width="900" height="1300"></canvas>
+          </div>
+          <div style="width: 100%; max-width: 400px; display: flex; gap: 12px; margin-top: 24px;">
+            <button class="btn btn-secondary" id="btnDescargarPNG" style="flex: 1;">📥 Descargar PNG</button>
+            <button class="btn btn-primary" id="btnGuardarHistorial" style="flex: 1;">💾 Guardar Historial</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 2: IDENTIDAD DE MARCA (ADMIN/PROPIETARIO) -->
+    <div class="view-container" id="view-identidad">
+      <div class="brand-identity-panel">
+        
+        <!-- Tarjeta Logo Oficial -->
+        <div class="card">
+          <div class="card-title">Logo Oficial Supermercado Fontana</div>
+          <div class="logo-display-card">
+            <img src="logo_super_fontana.jpg" alt="Logo Oficial Super Fontana" id="identidadLogoImg" onerror="this.src='https://placehold.co/200x200?text=Super+Fontana'">
+          </div>
+          <div style="margin-top: 16px;">
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Este es el logo fijo e inalterable utilizado en la parte inferior de toda la cartelería comercial.</p>
+          </div>
+        </div>
+
+        <!-- Paletas de Colores e Identidad -->
+        <div class="card">
+          <div class="card-title">Paleta de Colores Institucionales</div>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom: 14px;">Utilizados para parches y textos para fundirse con la estética original de la cartelería:</p>
+          
+          <div class="form-group">
+            <label>Colores Principales</label>
+            <div class="color-palette">
+              <div class="color-swatch" style="background-color: #d00000; color: #fff;"><span>Rojo (#d00000)</span></div>
+              <div class="color-swatch" style="background-color: #ffd700; color: #000;"><span>Amarillo (#ffd700)</span></div>
+              <div class="color-swatch" style="background-color: #1a1a1a; color: #fff;"><span>Negro (#1a1a1a)</span></div>
+              <div class="color-swatch" style="background-color: #ffffff; color: #000; border:1px solid #555;"><span>Blanco (#ffffff)</span></div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 24px;">
+            <label>Mapeo de Colores de Tapado Sugeridos</label>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Categoría</th>
+                    <th>Color de Fondo sugerido</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Bebidas / Vinos</td>
+                    <td><span style="display:inline-block; width:12px; height:12px; background:#111111; margin-right:6px; border-radius:2px;"></span> Oscuro (#111111)</td>
+                  </tr>
+                  <tr>
+                    <td>Verdulería</td>
+                    <td><span style="display:inline-block; width:12px; height:12px; background:#ffffff; margin-right:6px; border-radius:2px; border: 1px solid #555;"></span> Blanco (#ffffff)</td>
+                  </tr>
+                  <tr>
+                    <td>Galletitas / Almacén</td>
+                    <td><span style="display:inline-block; width:12px; height:12px; background:#ffffff; margin-right:6px; border-radius:2px; border: 1px solid #555;"></span> Blanco / Crema (#ffffff)</td>
+                  </tr>
+                  <tr>
+                    <td>Limpieza</td>
+                    <td><span style="display:inline-block; width:12px; height:12px; background:#003080; margin-right:6px; border-radius:2px;"></span> Azul Limpieza (#003080)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gestión de Logos de Marcas de Terceros -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <div class="card-title">Gestión de Logos de Marcas Comercializadas</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 16px;">
+            <p style="font-size:12px; color:var(--text-muted);">Sube los logos reales de las marcas (Marolio, Arcor, Nestlé, etc.) para que se reutilicen en los carteles:</p>
+            <button class="btn btn-primary" id="btnCrearMarcaModal" style="padding: 6px 12px; font-size:12px;">+ Nueva Marca</button>
+          </div>
+          
+          <div class="table-container">
+            <table class="data-table" id="marcasTable">
+              <thead>
+                <tr>
+                  <th>Logo</th>
+                  <th>Nombre de Marca</th>
+                  <th>Fecha de Carga</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Carga dinámica -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VISTA 3: BIBLIOTECA DE PLANTILLAS Y ANOTADOR (ADMIN) -->
+    <div class="view-container" id="view-plantillas">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px;">
+        <p style="font-size: 14px; color: var(--text-muted);">Maneja y define la "memoria visual" de los 63 carteles históricos. Selecciona una plantilla para configurar sus zonas de parche.</p>
+        <button class="btn btn-primary" id="btnSubirPlantillaModal">+ Subir Plantilla</button>
+      </div>
+
+      <!-- Filtros por categoría de cartel -->
+      <div class="filter-tabs" id="templateFilterTabs">
+        <button class="filter-tab active" data-filter="todos">Todos</button>
+        <button class="filter-tab" data-filter="02_gondola_producto">Góndola / Producto</button>
+        <button class="filter-tab" data-filter="03_precio_mayorista">Precio Mayorista</button>
+        <button class="filter-tab" data-filter="04_variedades_mismo_precio">Variedades</button>
+        <button class="filter-tab" data-filter="05_sin_imagen_solo_texto">Sin Imagen</button>
+        <button class="filter-tab" data-filter="01_marcas">Folleto de Marca</button>
+        <button class="filter-tab" data-filter="06_logo_plantilla">Asset de Logo</button>
+      </div>
+
+      <!-- Grilla de plantillas -->
+      <div class="template-grid" id="templatesGrid">
+        <!-- Carga dinámica -->
+      </div>
+    </div>
+
+    <!-- VISTA 4: CATÁLOGO DE PRODUCTOS (ADMIN) -->
+    <div class="view-container" id="view-productos">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px;">
+        <p style="font-size:14px; color:var(--text-muted);">Administra la base de datos de productos. El generador utilizará estos datos e imágenes para poblar los carteles.</p>
+        <button class="btn btn-primary" id="btnCrearProductoModal">+ Nuevo Producto</button>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table" id="productosTable">
+          <thead>
+            <tr>
+              <th>Foto</th>
+              <th>Producto</th>
+              <th>Marca</th>
+              <th>Categoría</th>
+              <th>Estilo Visual</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Carga dinámica -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- VISTA 5: HISTORIAL DE CARTELES GENERADOS -->
+    <div class="view-container" id="view-historial">
+      <div style="margin-bottom: 24px;">
+        <p style="font-size:14px; color:var(--text-muted);">Historial de piezas generadas y listas para su descarga o impresión directa.</p>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table" id="historialTable">
+          <thead>
+            <tr>
+              <th>Cartel</th>
+              <th>Fecha de Creación</th>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Carga dinámica -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- VISTA 6: CONFIGURACIÓN GENERAL (SETTINGS) -->
+    <div class="view-container" id="view-configuracion">
+      <div class="card-grid">
+        <div class="card" style="grid-column: 1 / 7;">
+          <div class="card-title">Enlace con Supabase</div>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:18px;">Ingresa las credenciales de tu proyecto de Supabase para enlazar la base de datos y Storage.</p>
+          
+          <div class="form-group">
+            <label for="configUrl">Supabase URL</label>
+            <input type="text" id="configUrl" placeholder="https://tu-proyecto.supabase.co">
+          </div>
+          <div class="form-group">
+            <label for="configAnonKey">Supabase Anon Key (Public)</label>
+            <input type="password" id="configAnonKey" placeholder="Clave pública anon">
+          </div>
+          <div style="margin-top: 10px;">
+            <button class="btn btn-primary" id="btnGuardarConfig" style="width:100%;">Conectar a Supabase</button>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: 7 / -1;">
+          <div class="card-title">Instrucciones de Uso Local</div>
+          <p style="font-size:13px; margin-bottom: 12px;">Para inicializar tu base de datos Supabase:</p>
+          <ol style="font-size:13px; margin-left: 20px; color: var(--text-muted); display:flex; flex-direction:column; gap:8px;">
+            <li>Crea un proyecto gratis en <a href="https://supabase.com" target="_blank" style="color:var(--secondary);">supabase.com</a></li>
+            <li>Ve a la pestaña <b>SQL Editor</b> de Supabase, crea una consulta nueva y pega el contenido del archivo <code style="color:var(--text-main); background:#222; padding:2px 4px; border-radius:4px;">schema.sql</code> que está en esta carpeta.</li>
+            <li>En tu computadora de Windows, haz clic derecho sobre el archivo <code style="color:var(--text-main); background:#222; padding:2px 4px; border-radius:4px;">seed_supabase.ps1</code> y selecciona "Ejecutar con PowerShell". Introduce la URL de tu proyecto y la <b>Service Role Key</b> (que encuentras en Settings -> API).</li>
+            <li>¡Listo! Tu base de datos y Storage se poblarán con las 63 plantillas y el logo oficial. Copia la URL y la Anon Key pública en este formulario para conectar la aplicación.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODAL: ANOTADOR VISUAL DE PLANTILLAS (ADMIN-ONLY) -->
+  <div class="modal-overlay" id="annotatorModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="annotatorTitle">Anotador Visual de Plantilla</div>
+        <button class="modal-close" onclick="closeAnnotator()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="annotator-layout">
+          <!-- Canvas para Anotación -->
+          <div class="annotator-canvas-container">
+            <canvas id="annotatorCanvas" width="900" height="1300"></canvas>
+          </div>
+
+          <!-- Controles de Zonas -->
+          <div class="annotator-sidebar">
+            <h3 style="font-size:13px; color:var(--secondary); text-transform:uppercase; margin-bottom:4px;">Zonas Configuradas</h3>
+            <p style="font-size:11px; color:var(--text-muted); margin-bottom:10px;">Arrastra un rectángulo en el lienzo para crear una zona, luego configúrala:</p>
+            
+            <div style="display:flex; gap:6px;">
+              <button class="btn btn-primary" id="btnCrearZona" style="flex:1; padding:8px 12px; font-size:12px;">+ Agregar Zona</button>
+            </div>
+
+            <!-- Campos de Configuración de la Zona Seleccionada -->
+            <div id="zonaConfigFields" style="display:none; padding:12px; background:rgba(255,255,255,0.03); border-radius:6px; border: 1px solid var(--border-color); margin-top:10px;">
+              <div class="form-group" style="margin-bottom:10px;">
+                <label>Rol de la Zona</label>
+                <select id="zonaRol">
+                  <option value="precio">Precio</option>
+                  <option value="nombre">Nombre del Producto</option>
+                  <option value="imagen_producto">Foto del Producto</option>
+                  <option value="logo_marca">Logo de Marca</option>
+                  <option value="formato">Formato / Peso</option>
+                  <option value="subtitulo">Subtítulo / Detalle</option>
+                </select>
+              </div>
+              <div class="row-grid" style="gap:10px; margin-bottom:10px;">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label>Tamaño Fuente</label>
+                  <input type="number" id="zonaFontSize" value="60">
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label>Color Texto</label>
+                  <input type="color" id="zonaColor" value="#ffffff" style="height:38px; padding:2px;">
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom:10px;">
+                <label>Color Tapado (Fondo)</label>
+                <input type="color" id="zonaBg" value="#1a1a1a" style="height:38px; padding:2px;">
+              </div>
+              <div class="form-group" style="margin-bottom:0; display:flex; align-items:center; gap:8px;">
+                <input type="checkbox" id="zonaBgOn" checked style="width:16px; height:16px;">
+                <label style="margin-bottom:0; cursor:pointer;" for="zonaBgOn">Habilitar Fondo Tapado</label>
+              </div>
+            </div>
+
+            <!-- Lista de Zonas creadas -->
+            <div style="flex:1; overflow-y:auto; margin-top:10px;" id="annotatorPatchList">
+              <!-- Zonas cargadas -->
+            </div>
+
+            <button class="btn btn-primary" id="btnGuardarAnotaciones" style="width:100%; margin-top:auto;">Guardar Memoria Visual</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALS DE CREACIÓN Y EDICIÓN -->
+  <!-- 1. Modal Nueva Marca -->
+  <div class="modal-overlay" id="marcaModal">
+    <div class="modal-content" style="max-width:450px;">
+      <div class="modal-header">
+        <div class="modal-title">Agregar Nueva Marca</div>
+        <button class="modal-close" onclick="closeMarcaModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="marcaForm">
+          <div class="form-group">
+            <label for="marcaNombre">Nombre de la Marca</label>
+            <input type="text" id="marcaNombre" required placeholder="Ej: Arcor">
+          </div>
+          <div class="form-group">
+            <label for="marcaLogoFile">Archivo de Logo</label>
+            <input type="file" id="marcaLogoFile" accept="image/*" required>
+          </div>
+          <button class="btn btn-primary" type="submit" style="width:100%; margin-top:14px;">Subir y Registrar Marca</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Modal Nuevo Producto -->
+  <div class="modal-overlay" id="productoModal">
+    <div class="modal-content" style="max-width:500px;">
+      <div class="modal-header">
+        <div class="modal-title">Agregar Nuevo Producto</div>
+        <button class="modal-close" onclick="closeProductoModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="productoForm">
+          <div class="form-group">
+            <label for="prodNombre">Nombre del Producto</label>
+            <input type="text" id="prodNombre" required placeholder="Ej: Galletitas Chocolate 200g">
+          </div>
+          <div class="form-group">
+            <label for="prodMarca">Marca</label>
+            <select id="prodMarca">
+              <option value="">(Sin Marca)</option>
+              <!-- Carga dinámica -->
+            </select>
+          </div>
+          <div class="row-grid">
+            <div class="form-group">
+              <label for="prodCategoria">Categoría Comercial</label>
+              <select id="prodCategoria" required>
+                <option value="Bebidas">Bebidas / Vinos</option>
+                <option value="Limpieza">Limpieza</option>
+                <option value="Verdulería">Verdulería</option>
+                <option value="Almacén">Almacén Diario</option>
+                <option value="Lácteos">Lácteos</option>
+                <option value="Fiambrería">Fiambrería</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="prodEstilo">Estilo Visual</label>
+              <select id="prodEstilo" required>
+                <option value="Elegante">Elegante (Premium)</option>
+                <option value="Fresco">Fresco (Verdulería)</option>
+                <option value="Familiar">Familiar (Almacén)</option>
+                <option value="Confianza">Confianza (Limpieza/Hogar)</option>
+                <option value="Diario">Consumo Diario</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="prodFotoFile">Foto de Producto</label>
+            <input type="file" id="prodFotoFile" accept="image/*" required>
+          </div>
+          <button class="btn btn-primary" type="submit" style="width:100%; margin-top:14px;">Registrar Producto</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Modal Subir Plantilla Base -->
+  <div class="modal-overlay" id="plantillaModal">
+    <div class="modal-content" style="max-width:500px;">
+      <div class="modal-header">
+        <div class="modal-title">Subir Nueva Plantilla Base</div>
+        <button class="modal-close" onclick="closePlantillaModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="plantillaForm">
+          <div class="form-group">
+            <label for="platNombre">Nombre descriptivo</label>
+            <input type="text" id="platNombre" required placeholder="Ej: Plantilla Vinos Tinto Premium 01">
+          </div>
+          <div class="row-grid">
+            <div class="form-group">
+              <label for="platCat">Tipo de Comunicación</label>
+              <select id="platCat" required>
+                <option value="02_gondola_producto">Góndola / Oferta</option>
+                <option value="03_precio_mayorista">Precio Mayorista</option>
+                <option value="04_variedades_mismo_precio">Variedades</option>
+                <option value="05_sin_imagen_solo_texto">Sin Imagen</option>
+                <option value="01_marcas">Folleto de Marca</option>
+                <option value="06_logo_plantilla">Asset de Logo</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="platEstilo">Estilo sugerido</label>
+              <select id="platEstilo" required>
+                <option value="General">General / Todos</option>
+                <option value="Elegante">Elegante (Premium)</option>
+                <option value="Fresco">Fresco (Verdulería)</option>
+                <option value="Familiar">Familiar (Almacén)</option>
+                <option value="Confianza">Confianza (Limpieza/Hogar)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="platFotoFile">Archivo de la Plantilla</label>
+            <input type="file" id="platFotoFile" accept="image/*" required>
+          </div>
+          <button class="btn btn-primary" type="submit" style="width:100%; margin-top:14px;">Subir a la Biblioteca</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARCHIVOS JS DEL PROYECTO -->
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
